@@ -1,0 +1,19 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.0.0
+MinimumVisualStudioVersion = 10.0.0.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightEdit", "FlightEdit.csproj", "{74C46461-61D2-4B51-ACEF-704D4F5ED39D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		|Any CPU = |Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74C46461-61D2-4B51-ACEF-704D4F5ED39D}.|Any CPU.ActiveCfg = |Any CPU
+		{74C46461-61D2-4B51-ACEF-704D4F5ED39D}.|Any CPU.Build.0 = |Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
