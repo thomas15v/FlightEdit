@@ -25,8 +25,6 @@ namespace FlightEdit.FlightEdit
 
             ConfigNode CN = new ConfigNode("ShipConstruct");
             CN = ConstructToSave.SaveShip();
-            
-            CleanEditorNodes(CN);
 
             VesselToSave.SetRotation(OriginalRotation);
             VesselToSave.SetPosition(OriginalPosition);
@@ -35,40 +33,6 @@ namespace FlightEdit.FlightEdit
             CN.Save(filename);
             return filename;
         }
-        
-        private static void CleanEditorNodes (ConfigNode CN)
-        {
 
-            CN.SetValue("EngineIgnited", "False");
-            CN.SetValue("currentThrottle", "0");
-            CN.SetValue("Staged", "False");
-            CN.SetValue("sensorActive", "False");
-            CN.SetValue("throttle", "0");
-            CN.SetValue("generatorIsActive", "False");
-            CN.SetValue("persistentState", "STOWED");
-
-            string ModuleName = CN.GetValue("name");
-
-            // Turn off or remove specific things
-            if ("ModuleScienceExperiment" == ModuleName)
-            {
-                CN.RemoveNodes("ScienceData");
-            }
-            else if ("ModuleScienceExperiment" == ModuleName)
-            {
-                CN.SetValue("Inoperable", "False");
-                CN.RemoveNodes("ScienceData");
-            }
-            else if ("Log" == ModuleName)
-            {
-                CN.ClearValues();
-            }
-
-
-            for (int IndexNodes = 0; IndexNodes < CN.nodes.Count; IndexNodes++)
-            {
-                CleanEditorNodes (CN.nodes[IndexNodes]);
-            }
-        }
     }
 }
