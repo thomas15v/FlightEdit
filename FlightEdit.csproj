@@ -41,9 +41,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FlightEdit.cs" />
     <Compile Include="FlightEditAddon.cs" />
-    <Compile Include="InflightSave.cs" />
+    <Compile Include="FlightEdit\FlightEdit.cs" />
+    <Compile Include="FlightEdit\InflightSave.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

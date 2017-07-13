@@ -6,7 +6,7 @@
 
 using UnityEngine;
 
-namespace FlightEdit
+namespace FlightEdit.FlightEdit
 {
     public class InflightSave
     {
@@ -25,11 +25,13 @@ namespace FlightEdit
 
             ConfigNode CN = new ConfigNode("ShipConstruct");
             CN = ConstructToSave.SaveShip();
+            
+            CleanEditorNodes(CN);
 
             VesselToSave.SetRotation(OriginalRotation);
             VesselToSave.SetPosition(OriginalPosition);
 
-            string filename = UrlDir.ApplicationRootPath + "GameData/FlightEdit/" + ShipName + "_Rescued.craft";
+            string filename = UrlDir.ApplicationRootPath + "GameData/FlightEdit/temp.craft";
             CN.Save(filename);
             return filename;
         }
