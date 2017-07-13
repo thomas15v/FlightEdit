@@ -35,6 +35,7 @@ namespace FlightEdit.FlightEdit
         public void OnCraftEdit()
         {
             if (FlightGlobals.ActiveVessel == null) return;
+            GamePersistence.SaveGame("persistent", HighLogic.SaveFolder, SaveMode.OVERWRITE);
             EdditingVessel = true;
             Vesselid = FlightGlobals.ActiveVessel.protoVessel.vesselID;
             EditorDriver.StartAndLoadVessel(InflightSave.TemporarySaveVessel(FlightGlobals.ActiveVessel), 
@@ -46,10 +47,21 @@ namespace FlightEdit.FlightEdit
             var game = GamePersistence.LoadGame(FlightDriver.StateFileToLoad, HighLogic.SaveFolder, true, true);
             var vesselid = game.flightState.protoVessels.FindIndex(v => v.vesselID.Equals(Vesselid));
             var vessel = game.flightState.protoVessels[vesselid];
-            var newVessel = GetVesselFromShipConstruct(EditorLogic.fetch.ship, vessel, game);
-
-//            var crewableParts = EditorLogic.fetch.ship.parts.FindAll(p => p.CrewCapacity > 0);
             
+            foreach (var crewMember in vessel.GetVesselCrew())
+            {
+                var part = EditorLogic.fetch.ship.parts.Find(p => p.protoModuleCrew.Count < p.CrewCapacity);
+                if (part == null)
+                {
+                    Debug.LogWarning("We dit not had enough space for this kerbal");
+                }
+                else
+                {
+                    part.AddCrewmemberAt(crewMember, part.protoModuleCrew.Count);
+                }
+            }
+            
+            var newVessel = GetVesselFromShipConstruct(EditorLogic.fetch.ship, vessel, game); 
             vessel.protoPartSnapshots = newVessel.protoPartSnapshots;
            
             GamePersistence.SaveGame(game, FlightDriver.StateFileToLoad, HighLogic.SaveFolder, SaveMode.OVERWRITE);
